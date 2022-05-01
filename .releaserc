@@ -1,0 +1,73 @@
+{
+    "branches": [
+      "main"
+    ],
+    "repositoryUrl": "https://github.com/FlowRage/limitless.git",
+    "plugins": [
+      [
+        "@semantic-release/commit-analyzer",
+        {
+          "preset": "conventionalcommits",
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES"
+            ]
+          }
+        }
+      ],
+      [
+        "@semantic-release/release-notes-generator",
+        {
+          "preset": "conventionalcommits",
+          "presetConfig": {
+            "types": [
+              {"type": "feat", "section": "Features"},
+              {"type": "fix", "section": "Bug Fixes"},
+              {"type": "perf", "section": "Performance Improvements"},
+              {"type": "revert", "section": "Reverts"},
+              {"type": "docs", "section": "Documentation", "hidden": false},
+              {"type": "style", "section": "Styles", "hidden": false},
+              {"type": "chore", "section": "Miscellaneous Chores", "hidden": false},
+              {"type": "refactor", "section": "Code Refactoring", "hidden": false},
+              {"type": "test", "section": "Tests", "hidden": false},
+              {"type": "build", "section": "Build System", "hidden": false},
+              {"type": "ci", "section": "Continuous Integration", "hidden": false}
+            ]
+          },
+          "parserOpts": {
+            "noteKeywords": [
+              "BREAKING CHANGE",
+              "BREAKING CHANGES",
+              "BREAKING"
+            ]
+          },
+          "writerOpts": {
+            "commitsSort": [
+              "subject",
+              "scope"
+            ]
+          }
+        }
+      ],
+      "@semantic-release/github",
+      "@semantic-release/changelog",
+      "@semantic-release/exec",
+      [
+        "@semantic-release/npm",
+        {
+          "npmPublish": false
+        }
+      ],
+      [
+        "@semantic-release/git",
+        {
+          "assets": [
+            "package.json",
+            "CHANGELOG.md"
+          ],
+          "message": "chore(release): <%= nextRelease.version %> - <%= new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' }) %> [skip-ci]"
+        }
+      ]
+    ]
+  }
