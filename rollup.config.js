@@ -4,6 +4,9 @@ import commonjs from "@rollup/plugin-commonjs";
 import json from "@rollup/plugin-json";
 import { terser } from "rollup-plugin-terser";
 import path from "path";
+import pkg from './package.json';
+
+const external = Object.keys(pkg.devDependencies);
 
 const production = process.env.production;
 
@@ -19,6 +22,7 @@ DIST.FILE = path.join(DIST.DIRECTORY, "index.js");
 
 
 export default {
+  external,
   input: SOURCE.FILE,
   output: [
     {
@@ -29,7 +33,9 @@ export default {
   ],
   plugins: [
     json(),
-    resolve(),
+    resolve({
+      preferBuiltins: true
+    }),
     commonjs(),
     typescript({
       typescript: require("typescript")

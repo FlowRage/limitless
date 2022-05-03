@@ -3,7 +3,7 @@
     "module": "ES6",
     "target": "ES5",
     "moduleResolution": "node",
-    "allowJs": false,
+    "allowJs": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
